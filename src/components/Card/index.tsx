@@ -4,9 +4,10 @@ import styles from "./styles.module.scss";
 
 interface ICard {
   cardId: string;
+  title: string;
 }
 
-const Card = ({ cardId }: ICard) => {
+const Card = ({ cardId, title }: ICard) => {
   const [activeSquares, setActiveSquares] = useState<number[]>(() => {
     const saved = localStorage.getItem(`activeSquares-${cardId}`);
     return saved ? JSON.parse(saved) : [];
@@ -64,7 +65,7 @@ const Card = ({ cardId }: ICard) => {
 
   return (
     <article className={styles["card"]}>
-      <h2 className={styles["card__title"]}>📚 Чтение книги</h2>
+      <h2 className={styles["card__title"]}>{title}</h2>
       <Squares
         className={styles["card__squares"]}
         activeSquares={activeSquares}
