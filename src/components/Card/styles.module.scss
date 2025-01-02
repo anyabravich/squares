@@ -3,6 +3,10 @@
 .card {
   &__title {
     margin-bottom: rem(16);
+
+    @media (max-width: 768px) {
+      font-size: rem(20);
+    }
   }
 
   &__squares {
