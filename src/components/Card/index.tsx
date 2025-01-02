@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Squares from "../Squares";
 import styles from "./styles.module.scss";
 
-const Card = () => {
-  const [activeSquares, setActiveSquares] = useState<number[]>([]);
+interface ICard {
+  cardId: string;
+}
+
+const Card = ({ cardId }: ICard) => {
+  const [activeSquares, setActiveSquares] = useState<number[]>(() => {
+    const saved = localStorage.getItem(`activeSquares-${cardId}`);
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const saveToLocalStorage = (newActiveSquares: number[]) => {
+    localStorage.setItem(
+      `activeSquares-${cardId}`,
+      JSON.stringify(newActiveSquares)
+    );
+  };
 
   const toggleSquare = (index: number) => {
-    setActiveSquares((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+    setActiveSquares((prev) => {
+      const updated = prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index];
+      saveToLocalStorage(updated);
+      return updated;
+    });
   };
 
   const getTodayIndex = () => {
@@ -18,6 +36,13 @@ const Card = () => {
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
   };
+
+  useEffect(() => {
+    const saved = localStorage.getItem(`activeSquares-${cardId}`);
+    if (saved) {
+      setActiveSquares(JSON.parse(saved));
+    }
+  }, [cardId]);
 
   return (
     <article className={styles["card"]}>

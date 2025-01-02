@@ -4,7 +4,8 @@ import styles from "./styles.module.scss";
 const Cards = () => {
   return (
     <section className={styles["cards"]}>
-      <Card />
+      <Card cardId="read-books" />
+      <Card cardId="1000-hours" />
     </section>
   );
 };
