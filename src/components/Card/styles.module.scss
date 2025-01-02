@@ -15,5 +15,8 @@
     border-radius: rem(6);
     padding: rem(10) rem(16);
     font-weight: 700;
+    &[disabled] {
+      opacity: 0.5;
+    }
   }
 }

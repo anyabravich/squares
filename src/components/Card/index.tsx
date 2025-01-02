@@ -12,6 +12,8 @@ const Card = ({ cardId }: ICard) => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [completedToday, setCompletedToday] = useState(false);
+
   const saveToLocalStorage = (newActiveSquares: number[]) => {
     localStorage.setItem(
       `activeSquares-${cardId}`,
@@ -42,7 +44,23 @@ const Card = ({ cardId }: ICard) => {
     if (saved) {
       setActiveSquares(JSON.parse(saved));
     }
+    const today = new Date();
+    const savedDate = localStorage.getItem(`completedDate-${cardId}`);
+    if (savedDate) {
+      const lastCompletedDate = new Date(savedDate);
+      if (lastCompletedDate.toDateString() === today.toDateString()) {
+        setCompletedToday(true);
+      }
+    }
   }, [cardId]);
+
+  const handleCompletion = () => {
+    const index = getTodayIndex();
+    toggleSquare(index);
+    const today = new Date();
+    localStorage.setItem(`completedDate-${cardId}`, today.toString());
+    setCompletedToday(true);
+  };
 
   return (
     <article className={styles["card"]}>
@@ -54,7 +72,8 @@ const Card = ({ cardId }: ICard) => {
       <button
         className={styles["card__button"]}
         type="button"
-        onClick={() => toggleSquare(getTodayIndex())}
+        onClick={handleCompletion}
+        disabled={completedToday}
       >
         ✅ Выполнено
       </button>
