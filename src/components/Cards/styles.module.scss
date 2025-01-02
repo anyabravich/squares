@@ -1,0 +1,8 @@
+@import "../../styles/constants";
+
+.cards {
+  padding-block: rem(60);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: rem(60);
+}

@@ -1,0 +1,8 @@
+@import "../../styles/mixins";
+
+.container {
+  --container-max-width: #{rem(1640)};
+
+  margin: 0 auto;
+  width: min(var(--container-max-width), 100% - (var(--container-padding) * 2));
+}

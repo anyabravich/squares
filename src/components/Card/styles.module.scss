@@ -1,0 +1,19 @@
+@import "../../styles/mixins";
+
+.card {
+  &__title {
+    margin-bottom: rem(16);
+  }
+
+  &__squares {
+    margin-bottom: rem(24);
+  }
+
+  &__button {
+    background: var(--white);
+    color: var(--dark);
+    border-radius: rem(6);
+    padding: rem(10) rem(16);
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,10 @@
+@import "./mixins";
+
+:root {
+  --white: #ffffff;
+  --background: #030303;
+  --dark: #161b22;
+  --green: #26a641;
+
+  --container-padding: #{rem(60)};
+}

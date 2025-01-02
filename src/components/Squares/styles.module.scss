@@ -1,0 +1,22 @@
+@import "../../styles/mixins";
+
+.squares {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(2);
+
+  &__square {
+    button {
+      --size: #{rem(10)};
+
+      width: var(--size);
+      height: var(--size);
+      background: var(--dark);
+      border-radius: rem(2);
+
+      &._active {
+        background: var(--green);
+      }
+    }
+  }
+}
